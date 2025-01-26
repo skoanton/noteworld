@@ -9,7 +9,8 @@ import AdminRoute from './routes/AdminRoute.tsx';
 import AdminPage from './routes/dashboard/admin/Admin.tsx';
 import DashboardPage from './routes/dashboard/Dashboard.tsx';
 import CreatePasswordPage from './routes/CreatePassword.tsx';
-import NewNotePage from './routes/dashboard/NewNote.tsx';
+import EditNotePage from './routes/dashboard/EditNote.tsx';
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -20,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
           <Route path="dashboard/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />
-          <Route path="dashboard/new-note" element={<ProtectedRoute><NewNotePage /></ProtectedRoute>} />
+          <Route path="dashboard/note/:id/edit" element={<ProtectedRoute><EditNotePage /></ProtectedRoute>} />
         </Route>
       </Routes>
 
