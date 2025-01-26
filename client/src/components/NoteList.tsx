@@ -34,9 +34,9 @@ export default function NoteList({ }: NoteListProps) {
                 <h2 className="text-2xl font-bold">Notes</h2>
                 <div className="flex flex-col gap-1">
                     {notes.map((note) => (
-                        <div key={note.id} onClick={() => handleClick(note.id)} className="hover:cursor-pointer ">
+                        <div key={note.id} onClick={() => handleClick(note.id)} className="hover:cursor-pointer flex flex-row justify-between p-2 border border-slate-300">
                             <h2 className="hover:text-slate-600">{note.title}</h2>
-                            <p>Last Edited: {note.updatedAt}</p>
+                            <p>{note.updatedAt}</p>
                         </div>
                     ))}
                 </div>

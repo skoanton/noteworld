@@ -1,10 +1,21 @@
 import { useNavigate } from "react-router"
 import { Button } from "./ui/button"
 import { createNote } from "@/api/note"
+import { useEffect, useState } from "react";
+import { getRoleFromToken } from "@/helpers/helpers";
 
 type HeaderProps = {}
 
 export default function Header({ }: HeaderProps) {
+
+    const [role, setRole] = useState<string | null>(null);
+
+    useEffect(() => {
+        const userRole = getRoleFromToken();
+        setRole(userRole);
+    }, []);
+
+
 
     const navigate = useNavigate()
 
@@ -42,9 +53,9 @@ export default function Header({ }: HeaderProps) {
                 <h1 onClick={() => handleClick()} className="text-4xl font-bold text-white hover:cursor-pointer">Note world</h1>
                 <div className="ml-auto">
                     <div className="flex gap-5">
-                        <Button onClick={() => navigate("/dashboard/admin")}>Admin</Button>
-                        <Button onClick={() => handleLogout()}>Logout</Button>
                         <Button onClick={() => handleNewNote()} >New note</Button>
+                        {role === "ADMIN" && <Button onClick={() => navigate("/dashboard/admin")}>Admin</Button>}
+                        <Button onClick={() => handleLogout()}>Logout</Button>
                     </div>
                 </div>
             </div>
