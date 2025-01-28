@@ -1,13 +1,34 @@
 {
   "name": "client",
-  "private": true,
-  "version": "0.0.0",
+  "description": "My Electron note app",
+  "version": "1.0.1",
+  "main": "dist/node/electron-main.cjs",
+  "build": {
+    "appId": "com.noteapp.desktop",
+    "productName": "Note Cloud",
+    "files": [
+      "dist/**",
+      "node_modules/**"
+    ],
+    "directories": {
+      "output": "build"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false
+    }
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron": "tsc && electron dist/node/electron-main.cjs",
+    "build:electron": "tsc --project tsconfig.node.json",
+    "start:dev": "npm run dev & npm run electron",
+    "dist": "electron-builder"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -35,11 +56,13 @@
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@types/lodash": "^4.17.14",
-    "@types/node": "^22.10.10",
+    "@types/node": "^22.12.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "electron": "^34.0.1",
+    "electron-builder": "^25.1.8",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",

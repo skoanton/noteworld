@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { BrowserRouter, Route, Routes } from "react-router";
+import { HashRouter, Route, Routes } from "react-router";
 import IndexPage from './routes/Index.tsx';
 import ProtectedRoute from './routes/ProtectedRoute.tsx';
 import DashboardLayout from './layout/DashboardLayout.tsx';
@@ -14,7 +14,7 @@ import EditNotePage from './routes/dashboard/EditNote.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<IndexPage />} />
         <Route path="/create-password" element={<ProtectedRoute><CreatePasswordPage /></ProtectedRoute>} />
@@ -24,8 +24,6 @@ createRoot(document.getElementById('root')!).render(
           <Route path="dashboard/note/:id/edit" element={<ProtectedRoute><EditNotePage /></ProtectedRoute>} />
         </Route>
       </Routes>
-
-
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode >,
 )
