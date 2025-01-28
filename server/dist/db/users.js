@@ -14,8 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserByEmail = getUserByEmail;
 exports.createUser = createUser;
+exports.createPassword = createPassword;
 const client_1 = require("@prisma/client");
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const prisma = new client_1.PrismaClient();
 function getUserByEmail(email) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -26,17 +27,28 @@ function getUserByEmail(email) {
         });
     });
 }
-function createUser(email_1, password_1) {
-    return __awaiter(this, arguments, void 0, function* (email, password, role = client_1.Role.USER) {
-        const hashedPassword = password ? yield bcrypt_1.default.hash(password, 10) : null;
+function createUser(email_1) {
+    return __awaiter(this, arguments, void 0, function* (email, role = client_1.Role.USER) {
         if (!Object.values(client_1.Role).includes(role)) {
             throw new Error(`Invalid role: ${role}`);
         }
         return prisma.user.create({
             data: {
                 email,
-                password: hashedPassword,
                 role
+            },
+        });
+    });
+}
+function createPassword(password, user) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                password: yield bcryptjs_1.default.hash(password, 10),
+                firstLogin: false,
             },
         });
     });

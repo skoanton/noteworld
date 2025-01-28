@@ -1,6 +1,6 @@
 import { get } from 'http';
 import jwt, { SignOptions } from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import { createPassword, createUser, getUserByEmail } from '../db/users';
 import dotenv from 'dotenv';
 import { Role, User } from '@prisma/client';
@@ -20,7 +20,7 @@ export async function authService(email: string, password: string | null) {
         return { firstLogin: true, token: token };
     }
     
-    if (!password || !(await bcrypt.compare(password, existingUser.password!))) {
+    if (!password || !(await bcryptjs.compare(password, existingUser.password!))) {
         throw new Error("Invalid password");
     }
 

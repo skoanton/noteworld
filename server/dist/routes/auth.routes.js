@@ -10,4 +10,5 @@ const client_1 = require("@prisma/client");
 const router = express_1.default.Router();
 router.post("/login", auth_controller_1.authController);
 router.post("/register", middleware_1.authenticate, (0, middleware_1.authorizeRoles)(client_1.Role.ADMIN), auth_controller_1.registerController);
+router.post("/create-password", middleware_1.authenticate, auth_controller_1.createPasswordController);
 exports.default = router;

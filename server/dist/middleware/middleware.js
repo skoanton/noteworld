@@ -17,12 +17,16 @@ exports.authorizeRoles = authorizeRoles;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function authenticate(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const token = req.header("Authorization");
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
         if (!token) {
             return res.status(401).json({ message: "Unauthorized" });
         }
         try {
             const decoded = verifyToken(token);
+            if (!decoded) {
+                return res.status(401).json({ error: 'Invalid or expired token' });
+            }
             req.user = decoded;
             next();
         }
@@ -32,14 +36,14 @@ function authenticate(req, res, next) {
     });
 }
 function authorizeRoles(requiredRole) {
-    return (req, res, next) => {
-        const user = req.user;
+    return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+        const user = yield req.user;
         if (!user || user.role !== requiredRole) {
             res.status(403).json({ message: 'Access denied' });
             return;
         }
         next();
-    };
+    });
 }
 function verifyToken(token) {
     return __awaiter(this, void 0, void 0, function* () {
