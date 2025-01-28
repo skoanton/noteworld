@@ -3,10 +3,6 @@
   "description": "My Electron note app",
   "version": "1.0.2",
   "main": "dist/node/electron-main.cjs",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/skoanton/noteworld.git"
-  },
   "build": {
     "appId": "com.noteapp.desktop",
     "productName": "Note Cloud",
@@ -22,12 +18,13 @@
       "icon": "build/icon.ico",
       "signAndEditExecutable": false
     },
-    "publish": {
-      "provider": "github",
-      "owner": "skoanton",
-      "repo": "noteworld",
-      "releaseType": "draft"
-    }
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "skoanton",
+        "repo": "noteworld"
+      }
+    ]
   },
   "type": "module",
   "scripts": {
@@ -38,7 +35,11 @@
     "electron": "tsc && electron dist/node/electron-main.cjs",
     "build:electron": "tsc --project tsconfig.node.json",
     "start:dev": "npm run dev & npm run electron",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -65,6 +66,12 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.6.1",
+    "@electron-forge/maker-deb": "^7.6.1",
+    "@electron-forge/maker-rpm": "^7.6.1",
+    "@electron-forge/maker-squirrel": "^7.6.1",
+    "@electron-forge/maker-zip": "^7.6.1",
+    "@electron-forge/publisher-github": "^7.6.1",
     "@eslint/js": "^9.17.0",
     "@types/lodash": "^4.17.14",
     "@types/node": "^22.12.0",

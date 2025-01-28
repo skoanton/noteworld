@@ -19,10 +19,11 @@ app.on('ready', () => {
         webPreferences: {
             nodeIntegration: true,
         },
+        autoHideMenuBar: true,
     });
 
     mainWindow.loadURL(BASE_URL); // Eller byggda filer
-
+    mainWindow.setMenu(null);
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
