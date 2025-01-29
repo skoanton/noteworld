@@ -10,11 +10,12 @@ COPY package*.json ./
 # Installera Node.js-beroenden
 RUN npm install
 
+COPY . .
 # Copy Prisma schema and configuration
 COPY src/prisma ./src/prisma
 RUN npx prisma generate --schema=./src/prisma/schema.prisma
 # Kopiera resten av backend-koden till containern
-COPY . .
+
 
 # Bygg TypeScript-filer
 RUN npm run build
