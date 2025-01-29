@@ -18,7 +18,8 @@ RUN npx prisma generate --schema=./src/prisma/schema.prisma
 
 
 # Bygg TypeScript-filer
-RUN npm run build
+RUN echo "Running npm run build" && npm run build && echo "Build completed"  # Lägg till loggning
+RUN ls -l dist/  # Kolla om dist finns efter build
 
 # Exponera backend-porten
 EXPOSE 5000
