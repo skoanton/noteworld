@@ -1,111 +1,45 @@
-## Starta projektet
+# NoteApp
 
-För att starta projektet, följ dessa steg:
+NoteApp is a secure and encrypted note-taking application that allows users to store and manage notes privately and safely. All notes are encrypted to ensure data security.
 
-1. Installera beroenden:
-    ```sh
-    cd client
-    npm install
-    ```
+## Features
 
-2. Starta Docker:
-    ```sh
-    cd ..
-    docker-compose up
-    ```
+- **Encrypted Notes** – All notes are stored in an encrypted format to ensure privacy and security.
+- **Assigned Accounts** – Users cannot create their own accounts; accounts must be assigned by an administrator.
+- **Upcoming AI Integration** – Planned functionality where AI can analyze and provide insights based on your notes.
+- **Improved UI** – Ongoing work to enhance the user interface and user experience.
 
-3. Starta utvecklingsservern:
-    ```sh
-    cd client
-    npm run dev
-    ```
+## Installation
 
-## Prisma Kommandon
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/noteapp.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd noteapp
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+4. Start the application:
+   ```sh
+   npm start
+   ```
 
-### Sätt upp ett nytt Prisma-projekt
+## Usage
+Since accounts are manually assigned, you need an invitation to log in and use the application.
 
-```sh
-cd server
-prisma init
-```
+## Future Updates
 
-### Generera artefakter (t.ex. Prisma Client)
+- **AI Integration** to enable querying notes for insights.
+- **Enhanced UI/UX** for a more intuitive user experience.
 
-```sh
-cd server
-prisma generate
-```
+## Contribute
 
-### Bläddra i din data
+If you would like to contribute to the project, submit a pull request or open an issue on GitHub.
 
-```sh
-cd server
-prisma studio
-```
+## License
 
-### Skapa migrationer från ditt Prisma-schema, tillämpa dem på databasen, generera artefakter (t.ex. Prisma Client)
-
-```sh
-cd server
-prisma migrate dev
-```
-
-### Hämta schemat från en befintlig databas och uppdatera Prisma-schemat
-
-```sh
-cd server
-prisma db pull
-```
-
-### Skicka Prisma-schemats tillstånd till databasen
-
-```sh
-cd server
-prisma db push
-```
-
-### Validera ditt Prisma-schema
-
-```sh
-cd server
-prisma validate
-```
-
-### Formatera ditt Prisma-schema
-
-```sh
-cd server
-prisma format
-```
-
-### Visa Prisma versionsinformation
-
-```sh
-cd server
-prisma version
-```
-
-### Visa Prisma debug-information
-
-```sh
-cd server
-prisma debug
-```
-
-## Detaljerade Kommandobeskrivningar
-
-### `npx prisma migrate dev`
-
-**Syfte:** Detta kommando genererar och tillämpar en ny migration baserat på dina Prisma-schemaändringar. Det skapar migrationsfiler som håller en historik över ändringar.
-
-**Användningsfall:** Använd detta när du vill upprätthålla en historik över databasändringar, vilket är viktigt för produktionsmiljöer eller när du arbetar i team. Det möjliggör versionskontroll av ditt databas-schema.
-
-**Fördelar:** Detta kommando inkluderar även kontroller för att tillämpa migrationer på ett kontrollerat sätt, vilket säkerställer dataintegritet.
-
-### `npx prisma db push`
-
-**Syfte:** Detta kommando används för att skicka ditt aktuella Prisma-schema direkt till databasen. Det tillämpar alla ändringar du har gjort i ditt schema utan att skapa migrationsfiler.
-
-**Användningsfall:** Det är särskilt användbart under utvecklingsfasen när du snabbt vill synkronisera ditt databas-schema med ditt Prisma-schema utan att oroa dig för migrationshistorik.
-
-**Varning:** Det kan skriva över data om dina schemaändringar påverkar befintliga tabeller eller kolumner, så det är bäst för tidig utveckling eller prototypning.
+This project is licensed under the MIT License.
