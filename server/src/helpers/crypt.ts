@@ -7,8 +7,6 @@ if (!secretKey || secretKey.length !== 32) {
     throw new Error("ENCRYPTION_SECRET must be exactly 32 characters long");
 }
 
-console.log("Secret key", secretKey);
-
 export function encrypt(text: string): string {
 
     const iv = crypto.randomBytes(16);

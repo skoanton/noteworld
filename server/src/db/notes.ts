@@ -8,8 +8,8 @@ export async function createNewNote(note: { title: string, content: string }, us
 
     const encryptedTitle = encrypt(note.title);
     const encryptedContent = note.content
-    ? encrypt(note.content) 
-    : ""; 
+        ? encrypt(note.content)
+        : "";
 
     return await prisma.note.create({
         data: {
@@ -28,17 +28,16 @@ export async function getNoteById(noteId: string) {
     });
 }
 
-export async function updateNote(userId:string,noteId: string, updates: { title?: string; content?: string }) {
+export async function updateNote(userId: string, noteId: string, updates: { title?: string; content?: string }) {
 
     const dataToUpdate: any = {
-        ...(updates.title && { title: encrypt(updates.title) }), 
-        ...(updates.content && { content: encrypt(updates.content) }), 
+        ...(updates.title && { title: encrypt(updates.title) }),
+        ...(updates.content && { content: encrypt(updates.content) }),
     };
 
     if (Object.keys(dataToUpdate).length === 0) {
         throw new Error("No fields to update");
     }
-    console.log("Data to update",dataToUpdate);
     return await prisma.note.update({
         where: {
             id: parseInt(noteId),
