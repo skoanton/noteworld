@@ -3,6 +3,10 @@ import jwt from "jsonwebtoken";
 
 const isProduction = process.env.NODE_ENV === "production";
 export async function authenticate(req: any, res: Response, next: NextFunction): Promise<any> {
+    if (req.method === "OPTIONS") {
+        return res.status(200).send();  // ✅ Släpp igenom preflight-requests
+    }
+
     const authHeader = req.headers['authorization'];
     const userAgent = req.headers['user-agent'];
 
