@@ -12,7 +12,7 @@ RUN npm install
 
 # Copy Prisma schema and configuration
 COPY src/prisma ./src/prisma
-
+RUN npx prisma generate --schema=./src/prisma/schema.prisma
 # Kopiera resten av backend-koden till containern
 COPY . .
 

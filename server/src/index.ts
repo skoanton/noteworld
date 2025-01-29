@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.routes';
 import notesRoutes from './routes/notes.routes';
 import { authenticate } from './middleware/middleware';
 
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
