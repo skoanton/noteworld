@@ -9,7 +9,8 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules
@@ -25,6 +26,11 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    healthcheck:  # ✅ Kollar om PostgreSQL är redo innan server startar
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
 
 volumes:
   postgres-data:
