@@ -14,6 +14,7 @@ export default function NoteList({ }: NoteListProps) {
         const fetchNotes = async () => {
 
             const response = await getAllNotes();
+            console.log(response);
             if (response) {
                 setNotes(response.notes);
             }
