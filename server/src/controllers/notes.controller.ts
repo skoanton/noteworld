@@ -50,10 +50,12 @@ export async function updateNoteController(req: any, res: Response): Promise<any
 
 export async function getAllNotesController(req: any, res: Response): Promise<any> {
     try {
+        console.log("User from request:", req.user);
         const user = await req.user;
         const userId = user.userId;
+        console.log("User ID:", userId); // Logga userId
         const notes = await getAllNotesService(userId);
-
+        console.log("Notes:", notes);
         return res.status(200).json({ notes });
     } catch (error: any) {
         return res.status(500).json({ error: error.message });
