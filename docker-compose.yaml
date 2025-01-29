@@ -11,9 +11,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    volumes:
-      - ./server:/usr/src/app
-      - /usr/src/app/node_modules
 
   postgres:
     image: postgres:latest
