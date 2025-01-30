@@ -6,6 +6,10 @@ export const login = async (email: string, password: string | null) => {
     const response = await axios.post(`${BASE_URL}/auth/login`, {
       email,
       password,
+    }, {
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      }
     });
 
     const token = response.data.auth.token;
@@ -29,6 +33,7 @@ export const register = async (email: string, role: string) => {
     }, {
       headers: {
         Authorization: `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "true",
       },
     });
     return response.data;
@@ -50,6 +55,7 @@ export const createPassword = async (password: string) => {
     }, {
       headers: {
         Authorization: `Bearer ${token}`,
+        "ngrok-skip-browser-warning": "true",
       },
     });
     console.log(response.data);

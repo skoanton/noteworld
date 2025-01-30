@@ -8,7 +8,10 @@
     "dev": "nodemon --watch src --exec ts-node --files src/index.ts",
     "build": "tsc",
     "prisma:migrate": "npx prisma migrate deploy --schema=./src/prisma/schema.prisma",
-    "prisma:generate": "npx prisma generate --schema=./src/prisma/schema.prisma"
+    "prisma:generate": "npx prisma generate --schema=./src/prisma/schema.prisma",
+    "prisma:studio": "npx prisma studio --schema=./src/prisma/schema.prisma",
+    "prisma:seed": "npx ts-node src/prisma/seed.ts"
+
   },
   "keywords": [],
   "author": "",

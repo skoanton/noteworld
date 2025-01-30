@@ -7,7 +7,6 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: false,
   },
-
   base: './',
   resolve: {
     alias: {

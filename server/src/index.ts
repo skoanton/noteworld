@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors({
   origin: "http://localhost:5173",  // Eller specificera din ngrok-url istället för "*"
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  allowedHeaders: ["Content-Type", "Authorization", "ngrok-skip-browser-warning"],
 }));
 app.use('/api/auth', authRoutes);
 app.use('/api/notes', authenticate, notesRoutes);
