@@ -1,3 +1,4 @@
+import { DEFAULT_HEADERS } from "@/consts/consts";
 import { Note } from "@/types/general";
 import axios from "axios";
 
@@ -8,10 +9,7 @@ export const createNote = async (note: { title: string, content: string }) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(`${BASE_URL}/notes`, note, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "true",
-      },
+      headers: DEFAULT_HEADERS(token),
     });
     console.log("Creating new note ", response.data);
     return response.data;
@@ -25,10 +23,7 @@ export const saveNote = async (noteId: string, updates: Partial<Note>) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.patch(`${BASE_URL}/notes/${noteId}`, updates, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "true",
-      },
+      headers: DEFAULT_HEADERS(token),
     });
 
     console.log("Updating note ", response.data);
@@ -42,10 +37,7 @@ export const deleteNote = async (noteId: number) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.delete(`${BASE_URL}/notes/${noteId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "true",
-      },
+      headers: DEFAULT_HEADERS(token),
     });
     return response.data;
   } catch (error) {
@@ -57,10 +49,7 @@ export const getNoteById = async (noteId: string) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(`${BASE_URL}/notes/${noteId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "true",
-      },
+      headers: DEFAULT_HEADERS(token),
     });
     return response.data;
   } catch (error) {
@@ -72,10 +61,7 @@ export const getAllNotes = async () => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(`${BASE_URL}/notes`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "true",
-      },
+      headers: DEFAULT_HEADERS(token),
     });
     return response.data;
   } catch (error) {

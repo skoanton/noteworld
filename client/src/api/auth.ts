@@ -1,3 +1,4 @@
+import { DEFAULT_HEADERS } from '@/consts/consts';
 import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -31,10 +32,7 @@ export const register = async (email: string, role: string) => {
       email,
       role,
     }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "true",
-      },
+      headers: DEFAULT_HEADERS(token),
     });
     return response.data;
   } catch (error: any) {
@@ -53,10 +51,7 @@ export const createPassword = async (password: string) => {
     const response = await axios.post(`${BASE_URL}/auth/create-password`, {
       password,
     }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "ngrok-skip-browser-warning": "true",
-      },
+      headers: DEFAULT_HEADERS(token),
     });
     console.log(response.data);
 
