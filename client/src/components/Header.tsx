@@ -4,7 +4,8 @@ import { createNote } from "@/api/note"
 import { useEffect, useState } from "react";
 import { getRoleFromToken } from "@/helpers/helpers";
 import { ModeToggle } from "./mode-toggle";
-
+import { Lock, Settings } from "lucide-react";
+import SettingsDropDown from "./SettingsDropDown";
 type HeaderProps = {}
 
 export default function Header({ }: HeaderProps) {
@@ -50,13 +51,13 @@ export default function Header({ }: HeaderProps) {
     return (
 
         <>
-            <div className=" flex gap-5 p-4 items-center w-full bg-primary-secondary border " >
+            <div className=" flex gap-5 p-4 items-center w-full bg-primary-secondary border-b " >
                 <h1 onClick={() => handleClick()} className="text-4xl font-bold hover:cursor-pointer">Note world</h1>
                 <div className="ml-auto">
                     <div className="flex gap-5">
                         <Button onClick={() => handleNewNote()} >New note</Button>
-                        {role === "ADMIN" && <Button onClick={() => navigate("/dashboard/admin")}>Admin</Button>}
-                        <Button onClick={() => handleLogout()}>Logout</Button>
+                        {role === "ADMIN" && <Button onClick={() => navigate("/dashboard/admin")}><Lock /></Button>}
+                        <SettingsDropDown />
                         <ModeToggle />
                     </div>
 
