@@ -50,15 +50,16 @@ export default function Header({ }: HeaderProps) {
     return (
 
         <>
-            <div className=" flex gap-5 p-4 items-center w-full bg-slate-700" >
-                <h1 onClick={() => handleClick()} className="text-4xl font-bold text-white hover:cursor-pointer">Note world</h1>
+            <div className=" flex gap-5 p-4 items-center w-full bg-primary-secondary border " >
+                <h1 onClick={() => handleClick()} className="text-4xl font-bold hover:cursor-pointer">Note world</h1>
                 <div className="ml-auto">
                     <div className="flex gap-5">
                         <Button onClick={() => handleNewNote()} >New note</Button>
                         {role === "ADMIN" && <Button onClick={() => navigate("/dashboard/admin")}>Admin</Button>}
                         <Button onClick={() => handleLogout()}>Logout</Button>
+                        <ModeToggle />
                     </div>
-                    <ModeToggle />
+
                 </div>
             </div>
         </>
