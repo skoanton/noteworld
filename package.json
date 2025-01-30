@@ -1,0 +1,6 @@
+ {
+    "scripts": {
+        "setup": "cp .env.example .env && cp client/.env.example client/.env && cp server/.env.example server/.env && npm install --prefix client && npm install --prefix server && docker compose up -d postgres && npm run setup --prefix server"
+            }
+
+ }

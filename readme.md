@@ -11,24 +11,60 @@ NoteApp is a secure and encrypted note-taking application that allows users to s
 
 ## Installation
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-repo/noteapp.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd noteapp
-   ```
-3. Install dependencies:
-   ```sh
-   npm install
-   ```
-4. Start the application:
-   ```sh
-   npm start
-   ```
+### 1. Klona repositoryt
+
+```sh
+git clone https://github.com/your-repo/noteapp.git
+```
+
+### 2. Navigera till projektmappen
+
+```sh
+cd noteapp
+```
+
+### 3. Kopiera och konfigurera miljövariabler
+
+```sh
+cp .env.example .env
+cp client/.env.example client/.env
+cp server/.env.example server/.env
+```
+
+### 4. Installera beroenden för både klient och server
+
+```sh
+npm install --prefix client
+npm install --prefix server
+```
+
+### 5. Starta PostgreSQL med Docker (valfritt för utvecklingsläge)
+
+```sh
+docker compose up postgres
+```
+
+### 6. Sätt upp servern
+
+```sh
+npm run setup --prefix server
+```
+
+### 7. Starta projektet
+
+```sh
+npm run dev --prefix server
+npm run dev --prefix client
+```
+
+## Quick start
+
+```sh
+npm run setup
+```
 
 ## Usage
+
 Since accounts are manually assigned, you need an invitation to log in and use the application.
 
 ## Future Updates
