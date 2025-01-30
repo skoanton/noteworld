@@ -8,17 +8,12 @@ export async function authenticate(req: any, res: Response, next: NextFunction):
     }
 
     const authHeader = req.headers['authorization'];
-    const userAgent = req.headers['user-agent'];
 
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
         return res.status(401).json({ message: "Unauthorized" });
 
-    }
-
-    if (isProduction && !userAgent.includes("ngrok")) {
-        return res.status(401).json({ message: "Forbidden: Requests must come through ngrok in production" });
     }
 
     try {
