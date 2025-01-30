@@ -10,20 +10,23 @@ import AdminPage from './routes/dashboard/admin/Admin.tsx';
 import DashboardPage from './routes/dashboard/Dashboard.tsx';
 import CreatePasswordPage from './routes/CreatePassword.tsx';
 import EditNotePage from './routes/dashboard/EditNote.tsx';
+import { ThemeProvider } from './components/theme-provider.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<IndexPage />} />
-        <Route path="/create-password" element={<ProtectedRoute><CreatePasswordPage /></ProtectedRoute>} />
-        <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-          <Route path="dashboard/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />
-          <Route path="dashboard/note/:id/edit" element={<ProtectedRoute><EditNotePage /></ProtectedRoute>} />
-        </Route>
-      </Routes>
-    </HashRouter>
+    <ThemeProvider>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/create-password" element={<ProtectedRoute><CreatePasswordPage /></ProtectedRoute>} />
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+            <Route path="dashboard/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />
+            <Route path="dashboard/note/:id/edit" element={<ProtectedRoute><EditNotePage /></ProtectedRoute>} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </ThemeProvider>
   </StrictMode >,
 )

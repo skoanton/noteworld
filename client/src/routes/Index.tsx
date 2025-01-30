@@ -1,5 +1,6 @@
 import LoginForm from "@/components/LoginForm"
 import Modal from "@/components/Modal"
+import { ModeToggle } from "@/components/mode-toggle"
 
 type IndexPageProps = {}
 

@@ -3,6 +3,7 @@ import { Button } from "./ui/button"
 import { createNote } from "@/api/note"
 import { useEffect, useState } from "react";
 import { getRoleFromToken } from "@/helpers/helpers";
+import { ModeToggle } from "./mode-toggle";
 
 type HeaderProps = {}
 
@@ -57,6 +58,7 @@ export default function Header({ }: HeaderProps) {
                         {role === "ADMIN" && <Button onClick={() => navigate("/dashboard/admin")}>Admin</Button>}
                         <Button onClick={() => handleLogout()}>Logout</Button>
                     </div>
+                    <ModeToggle />
                 </div>
             </div>
         </>
