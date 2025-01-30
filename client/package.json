@@ -1,7 +1,7 @@
 {
-  "name": "client",
+  "name": "note-world",
   "description": "My Electron note app",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "dist/node/electron-main.cjs",
   "build": {
     "appId": "com.noteapp.desktop",
