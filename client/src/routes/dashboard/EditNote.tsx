@@ -6,6 +6,7 @@ import { useParams } from 'react-router';
 import { getNoteById, saveNote } from '@/api/note';
 import { Note } from '@/types/general';
 import { debounce } from "lodash";
+import { Button } from '@/components/ui/button';
 type EditNotePageProps = {
 
 }
@@ -59,17 +60,25 @@ export default function EditNotePage({ }: EditNotePageProps) {
 
     }, [noteTitle]);
 
-
+    const handleDelete = () => {
+        console.log("Delete note");
+    }
 
     return (
         <>
             <div className="flex flex-col gap-5 w-full p-5">
-                <Input
-                    value={noteTitle}
-                    onChange={(e) => setNoteTitle(e.currentTarget.value)}
-                    placeholder="Note header"
-                    width={96}
-                />
+                <div className='flex justify-between items-center'>
+
+                    <Input
+                        value={noteTitle}
+                        onChange={(e) => setNoteTitle(e.currentTarget.value)}
+                        placeholder="Note header"
+                        className='w-1/4'
+                    />
+
+                    <Button variant={'destructive'} onClick={() => handleDelete()}>Delete note</Button>
+
+                </div>
                 {note && (
                     <Editor note={note} />
                 )}
