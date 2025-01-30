@@ -57,12 +57,6 @@ npm run dev --prefix server
 npm run dev --prefix client
 ```
 
-## Quick start
-
-```sh
-npm run setup
-```
-
 ## Usage
 
 Since accounts are manually assigned, you need an invitation to log in and use the application.
@@ -70,12 +64,3 @@ Since accounts are manually assigned, you need an invitation to log in and use t
 ## Future Updates
 
 - **AI Integration** to enable querying notes for insights.
-- **Enhanced UI/UX** for a more intuitive user experience.
-
-## Contribute
-
-If you would like to contribute to the project, submit a pull request or open an issue on GitHub.
-
-## License
-
-This project is licensed under the MIT License.
