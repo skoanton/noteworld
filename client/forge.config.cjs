@@ -5,7 +5,7 @@ module.exports = {
         {
             name: '@electron-forge/maker-squirrel',
             config: {
-                name: 'Note World',
+                name: 'Note-World',
                 authors: 'skoanton',
                 description: 'Fully encrypted notes',
             },
