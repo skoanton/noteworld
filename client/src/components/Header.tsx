@@ -4,7 +4,7 @@ import { createNote } from "@/api/note"
 import { useEffect, useState } from "react";
 import { getRoleFromToken } from "@/helpers/helpers";
 import { ModeToggle } from "./mode-toggle";
-import { Lock, Settings } from "lucide-react";
+import { Lock } from "lucide-react";
 import SettingsDropDown from "./SettingsDropDown";
 type HeaderProps = {}
 
@@ -19,12 +19,7 @@ export default function Header({ }: HeaderProps) {
 
 
 
-    const navigate = useNavigate()
-
-    const handleLogout = () => {
-        localStorage.removeItem("token")
-        navigate("/");
-    }
+    const navigate = useNavigate();
 
     const handleNewNote = async () => {
 

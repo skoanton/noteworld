@@ -1,6 +1,11 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
-import { autoUpdater } from 'electron-updater';
+import { updateElectronApp, UpdateSourceType } from 'update-electron-app';
+
+import log from 'electron-log/main';
+
+// Optional, initialize the logger for any renderer process
+log.initialize();
 let mainWindow: BrowserWindow | null;
 const isDev = !app.isPackaged;
 
@@ -31,7 +36,13 @@ app.on('ready', () => {
     });
 
     if (!isDev) {
-        autoUpdater.checkForUpdatesAndNotify();
+        updateElectronApp({
+            updateSource: {
+                type: UpdateSourceType.ElectronPublicUpdateService,
+                repo: 'skoanton/noteworld'
+            },
+            logger: log,
+        })
     }
 
 });
@@ -40,26 +51,4 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
     }
-});
-
-
-autoUpdater.on('update-available', () => {
-    console.log('En ny uppdatering finns tillgänglig!');
-});
-
-autoUpdater.on('update-not-available', () => {
-    console.log('Ingen uppdatering tillgänglig.');
-});
-
-autoUpdater.on('error', (err) => {
-    console.error('Fel vid uppdatering:', err);
-});
-
-autoUpdater.on('download-progress', (progressObj) => {
-    console.log(`Nedladdning: ${progressObj.percent.toFixed(2)}%`);
-});
-
-autoUpdater.on('update-downloaded', () => {
-    console.log('Uppdatering nedladdad. Startar om...');
-    autoUpdater.quitAndInstall();
 });

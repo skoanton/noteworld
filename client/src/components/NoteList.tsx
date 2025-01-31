@@ -1,7 +1,6 @@
 import { getAllNotes } from "@/api/note";
 import { Note } from "@/types/general";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import NoteCard from "./NoteCard";
 
 type NoteListProps = {}
@@ -9,7 +8,6 @@ type NoteListProps = {}
 export default function NoteList({ }: NoteListProps) {
 
     const [notes, setNotes] = useState<Note[]>([]);
-    const navigate = useNavigate();
     useEffect(() => {
 
         const fetchNotes = async () => {

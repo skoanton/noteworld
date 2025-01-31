@@ -1,14 +1,11 @@
 import {
     Card,
-    CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
 import { Note } from "@/types/general"
 import { useNavigate } from "react-router";
-import { Button } from "./ui/button";
 
 
 
