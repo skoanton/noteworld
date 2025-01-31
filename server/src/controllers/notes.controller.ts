@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createNewNoteService, getAllNotesService, getNoteByIdService, updateNoteService } from '../services/notes.service';
+import { createNewNoteService, deleteNoteService, getAllNotesService, getNoteByIdService, updateNoteService } from '../services/notes.service';
 
 
 export async function createNewNoteController(req: any, res: Response): Promise<any> {
@@ -57,6 +57,19 @@ export async function getAllNotesController(req: any, res: Response): Promise<an
         const notes = await getAllNotesService(userId);
         console.log("Notes:", notes);
         return res.status(200).json({ notes });
+    } catch (error: any) {
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+export async function deleteNoteController(req: any, res: Response): Promise<any> {
+    try {
+        const user = await req.user;
+        const userId = user.userId;
+        const noteId = req.params.id;
+        const deletedNote = await deleteNoteService(userId, noteId);
+
+        return res.status(204).json({ deletedNote });
     } catch (error: any) {
         return res.status(500).json({ error: error.message });
     }

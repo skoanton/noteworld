@@ -33,13 +33,17 @@ export const saveNote = async (noteId: string, updates: Partial<Note>) => {
   }
 }
 
-export const deleteNote = async (noteId: number) => {
+export const deleteNote = async (noteId: string) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.delete(`${BASE_URL}/notes/${noteId}`, {
       headers: DEFAULT_HEADERS(token),
     });
-    return response.data;
+
+    if (response.status === 204) {
+      return true;
+    }
+    return false;
   } catch (error) {
     console.error(error);
   }

@@ -54,3 +54,14 @@ export async function getAllNotes(userId: number) {
         }
     });
 }
+
+export async function deleteNote(userId: number, noteId: string) {
+    console.log("Deleting note with id:", noteId);
+    console.log("User ID:", userId);
+    return await prisma.note.delete({
+        where: {
+            id: parseInt(noteId),
+            userId: userId
+        }
+    });
+}

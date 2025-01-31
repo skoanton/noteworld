@@ -1,20 +1,20 @@
 import { get } from "http";
-import { createNewNote, getAllNotes, getNoteById, updateNote } from "../db/notes";
+import { createNewNote, deleteNote, getAllNotes, getNoteById, updateNote } from "../db/notes";
 import { decrypt } from "../helpers/crypt";
 
 export async function createNewNoteService(note: { title: string, content: string }, userId: number) {
-    
+
     const newNote = await createNewNote(note, userId);
     return newNote;
 
 }
 
 export async function getNoteByIdService(noteId: string) {
-   const note = await getNoteById(noteId);
+    const note = await getNoteById(noteId);
 
-   if(!note) {
-         throw new Error("Note not found");
-   }
+    if (!note) {
+        throw new Error("Note not found");
+    }
 
     const decryptedNote = {
         title: decrypt(note.title),
@@ -27,14 +27,14 @@ export async function getNoteByIdService(noteId: string) {
     return decryptedNote;
 }
 
-export async function updateNoteService(userId:string,noteId: string, updates: { title?: string; content?: string }) {
+export async function updateNoteService(userId: string, noteId: string, updates: { title?: string; content?: string }) {
     const note = await getNoteById(noteId);
 
-    if(!note) {
+    if (!note) {
         throw new Error("Note not found");
     }
 
-    const updatedNote = await updateNote(userId,noteId, updates);
+    const updatedNote = await updateNote(userId, noteId, updates);
 
     const decryptedNote = {
         title: decrypt(updatedNote.title),
@@ -67,4 +67,14 @@ export async function getAllNotesService(userId: number) {
     });
 
     return sortedNotes;
+}
+
+export async function deleteNoteService(userId: number, noteId: string) {
+    const note = await deleteNote(userId, noteId);
+    console.log("note deleted", note);
+    if (!note) {
+        throw new Error("Note not found");
+    }
+
+    return note;
 }
