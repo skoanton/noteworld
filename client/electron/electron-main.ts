@@ -27,6 +27,7 @@ app.on('ready', () => {
             preload: path.join(__dirname, 'preload.js'),
         },
         autoHideMenuBar: true,
+        icon: path.join(__dirname, 'assets/icon.ico')
     });
 
     mainWindow.loadURL(BASE_URL); // Eller byggda filer

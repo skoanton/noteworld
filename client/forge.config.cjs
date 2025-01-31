@@ -8,6 +8,7 @@ module.exports = {
                 name: 'Note-World',
                 authors: 'skoanton',
                 description: 'Fully encrypted notes',
+                setupIcon: './public/assets/icons/win/icon.ico',
             },
         },
         {
