@@ -1,5 +1,7 @@
 module.exports = {
-    packagerConfig: {},
+    packagerConfig: {
+        icon: './public/icon',
+    },
     rebuildConfig: {},
     makers: [
         {
@@ -8,12 +10,17 @@ module.exports = {
                 name: 'Note-World',
                 authors: 'skoanton',
                 description: 'Fully encrypted notes',
-                setupIcon: './public/assets/icons/win/icon.ico',
+                setupIcon: './public/icon.ico',
             },
         },
         {
             name: '@electron-forge/maker-zip',
             platforms: ['win32'],
+            config:{
+                options: {
+                    icon: './public/icon.ico',
+                }
+            }
         },
         {
             name: '@electron-forge/maker-deb',
