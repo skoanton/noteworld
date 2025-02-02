@@ -15,17 +15,19 @@ type ModalProps = {
     title: string
     description?: string
     children: React.ReactNode
-    openButtonText: string
+    openButtonText?: string
     closeButton?: boolean
     isOpen?: boolean
+    triggerButton?: boolean
+    onOpenChange?: () => void
 }
 
-export default function Modal({ title, description, children, openButtonText, closeButton, isOpen }: ModalProps) {
+export default function Modal({ title, description, children, openButtonText, closeButton, isOpen, triggerButton = true, onOpenChange }: ModalProps) {
 
     return (
         <>
-            <Dialog open={isOpen}>
-                {!isOpen && (
+            <Dialog open={isOpen} onOpenChange={onOpenChange}>
+                {triggerButton && (
 
                     <DialogTrigger asChild>
                         <Button>

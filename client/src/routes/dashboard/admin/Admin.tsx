@@ -6,9 +6,11 @@ type AdminPageProps = {}
 export default function AdminPage({ }: AdminPageProps) {
     return (
         <>
-            <Modal title="Create User" openButtonText="Create User" closeButton={true}>
-                <RegisterForm />
-            </Modal>
+            <div className="flex justify-center">
+                <Modal title="Create User" openButtonText="Create User" closeButton={true}>
+                    <RegisterForm />
+                </Modal>
+            </div>
         </>
     )
 }

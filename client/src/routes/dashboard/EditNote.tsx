@@ -7,6 +7,9 @@ import { deleteNote, getNoteById, saveNote } from '@/api/note';
 import { Note } from '@/types/general';
 import { debounce } from "lodash";
 import { Button } from '@/components/ui/button';
+import Modal from '@/components/Modal';
+import { Delete } from 'lucide-react';
+import DeletePrompt from '@/components/DeletePrompt';
 type EditNotePageProps = {
 
 }
@@ -14,6 +17,7 @@ type EditNotePageProps = {
 export default function EditNotePage({ }: EditNotePageProps) {
     const [noteTitle, setNoteTitle] = useState<string>("New note");
     const [note, setNote] = useState<Note | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const params = useParams();
     const navigate = useNavigate();
     const noteId = params.id;
@@ -61,21 +65,7 @@ export default function EditNotePage({ }: EditNotePageProps) {
     }, [noteTitle]);
 
     const handleDelete = () => {
-
-        const removeNote = async () => {
-            if (note) {
-                const response = await deleteNote(note.id);
-
-                if (response) {
-                    console.log("Note deleted");
-                    navigate('/dashboard');
-                }
-                else {
-                    console.log("Error deleting note");
-                }
-            }
-        }
-        removeNote();
+        setIsModalOpen(true);
     }
 
     return (
@@ -89,15 +79,19 @@ export default function EditNotePage({ }: EditNotePageProps) {
                         placeholder="Note header"
                         className='w-1/4'
                     />
-
-                    <Button variant={'destructive'} onClick={() => handleDelete()}>Delete note</Button>
+                    <Button variant="destructive" onClick={() => handleDelete()}>
+                        Delete Note
+                    </Button>
+                    <Modal title="Delete note" description="Are you sure you want to delete this note?" triggerButton={false} isOpen={isModalOpen} onOpenChange={() => setIsModalOpen(false)}>
+                        <DeletePrompt note={note} onClose={() => setIsModalOpen(false)} />
+                    </Modal>
 
                 </div>
                 {note && (
                     <Editor note={note} />
                 )}
 
-            </div>
+            </div >
         </>
     )
 }

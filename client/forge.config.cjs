@@ -1,4 +1,5 @@
 const { set } = require('lodash');
+const { release } = require('os');
 const path = require('path');
 
 module.exports = {
@@ -75,6 +76,7 @@ module.exports = {
                 },
                 prerelease: false,
                 draft: true,
+
             },
         },
     ],
