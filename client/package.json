@@ -15,7 +15,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico",
+      "icon": "build/output.ico",
       "signAndEditExecutable": false
     },
     "publish": [
@@ -29,7 +29,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite builds",
     "lint": "eslint .",
     "preview": "vite preview",
     "electron": "tsc && electron dist/node/electron-main.cjs",
@@ -84,6 +84,7 @@
     "autoprefixer": "^10.4.20",
     "electron": "^34.0.1",
     "electron-builder": "^25.1.8",
+    "electron-icon-builder": "^2.0.1",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",

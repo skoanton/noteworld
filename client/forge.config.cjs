@@ -1,8 +1,30 @@
+const { set } = require('lodash');
+const path = require('path');
+
 module.exports = {
     packagerConfig: {
-        icon: './public/icon',
+        icon: './public/icons/win/icon',
+        asar: true,
+        ignore: [
+            /\.env$/,                  // Ignore .env file
+            /\.env\.example$/,         // Ignore .env.example
+            /config\.example\.json$/,  // Ignore config.example.json
+            /README\.md$/,             // Ignore README.md
+            /build/,                    // Ignore build folder
+            /public/,                   // Ignore public folder
+            /\.gitignore$/,            // Ignore .gitignore file
+            /components\.json$/,      // Ignore components.json
+            /eslint\.config\.js$/,     // Ignorera ESLint-konfiguration
+            /postcss\.config\.js$/,    // Ignorera PostCSS-konfiguration
+            /tailwind\.config\.js$/,   // Ignorera Tailwind-konfiguration
+            /tsconfig\..*\.json$/,     // Ignorera alla TypeScript-konfigurationer
+            /vite\.config\.ts$/,       // Ignorera Vite-konfiguration
+            /config\.json$/,           // Ignorera config.json
+        ],
+
     },
-    rebuildConfig: {},
+    rebuildConfig: {    
+    },
     makers: [
         {
             name: '@electron-forge/maker-squirrel',
@@ -10,7 +32,9 @@ module.exports = {
                 name: 'Note-World',
                 authors: 'skoanton',
                 description: 'Fully encrypted notes',
-                setupIcon: './public/icon.ico',
+                setupIcon: './public/icons/win/icon.ico',
+                setupExe: 'Note-World.exe',
+                noMsi: true,
             },
         },
         {
@@ -18,7 +42,7 @@ module.exports = {
             platforms: ['win32'],
             config:{
                 options: {
-                    icon: './public/icon.ico',
+                    icon: './public/icons/win/icon.ico',
                 }
             }
         },
@@ -31,6 +55,16 @@ module.exports = {
             platforms: ['linux'],
         },
     ],
+    hooks: {
+        async beforeBuild() {
+            const outDir = path.resolve(__dirname, 'out');
+            if (fs.existsSync(outDir)) {
+                fs.rmSync(outDir, { recursive: true, force: true });
+                console.log('Old files in the out directory have been removed.');
+            }
+        },
+
+    },
     publishers: [
         {
             name: '@electron-forge/publisher-github',
