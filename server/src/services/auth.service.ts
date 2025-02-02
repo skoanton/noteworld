@@ -11,39 +11,39 @@ export async function authService(email: string, password: string | null) {
 
     const existingUser = await getUserByEmail(email);
 
-    if(!existingUser) {
-        throw new Error( "User not found");
+    if (!existingUser) {
+        throw new Error("User not found");
     }
 
-    if(existingUser.firstLogin) { 
+    if (existingUser.firstLogin && !password) {
         const token = await generateToken(existingUser, "15m");
         return { firstLogin: true, token: token };
     }
-    
+
     if (!password || !(await bcryptjs.compare(password, existingUser.password!))) {
         throw new Error("Invalid password");
     }
 
     const token = await generateToken(existingUser);
 
-    if(!token) {
+    if (!token) {
         throw new Error("Failed to generate token");
     }
 
 
-    return {token: token};
+    return { token: token };
 }
 
 
-export async function registerService(email: string,role?:Role) {
-    
+export async function registerService(email: string, role?: Role) {
+
     const existingUser = await getUserByEmail(email);
 
-    if(existingUser) {
+    if (existingUser) {
         throw new Error("User already exists");
     }
 
-    const newUser = await createUser(email,role);
+    const newUser = await createUser(email, role);
 
     if (!newUser) {
         throw new Error("Failed to create user");
@@ -69,7 +69,7 @@ export async function createPasswordService(password: string, user: User) {
     return updatedUser;
 }
 
-async function generateToken(existingUser:User,time:string ="1h") {
+async function generateToken(existingUser: User, time: string = "1h") {
 
     if (!process.env.JWT_SECRET) {
         throw new Error("JWT_SECRET is not defined in environment variables.");
@@ -85,5 +85,5 @@ async function generateToken(existingUser:User,time:string ="1h") {
         expiresIn: parseTimeToSeconds(time)
     };
 
-    return jwt.sign(payload, process.env.JWT_SECRET,options);
+    return jwt.sign(payload, process.env.JWT_SECRET, options);
 }
