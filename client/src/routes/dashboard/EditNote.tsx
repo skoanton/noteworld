@@ -2,13 +2,12 @@
 import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import Editor from '@/components/Editor';
-import { useNavigate, useParams } from 'react-router';
-import { deleteNote, getNoteById, saveNote } from '@/api/note';
+import { useParams } from 'react-router';
+import { getNoteById, saveNote } from '@/api/note';
 import { Note } from '@/types/general';
 import { debounce } from "lodash";
 import { Button } from '@/components/ui/button';
 import Modal from '@/components/Modal';
-import { Delete } from 'lucide-react';
 import DeletePrompt from '@/components/DeletePrompt';
 type EditNotePageProps = {
 
@@ -19,7 +18,6 @@ export default function EditNotePage({ }: EditNotePageProps) {
     const [note, setNote] = useState<Note | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const params = useParams();
-    const navigate = useNavigate();
     const noteId = params.id;
 
     useEffect(() => {
